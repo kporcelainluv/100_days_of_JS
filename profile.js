@@ -27,16 +27,21 @@ var contacts = [
 ];
 
 function lookUpProfile(name, prop) {
-  const userProfiles = contacts.filter(c => c.firstName === name);
-  const userProfile = userProfiles && userProfiles[0];
-  if (userProfile) {
-    if (userProfile[prop]) {
-      return userProfile[prop];
-    } else if (!(prop in userProfile)) {
-      return "No such property";
+  myArr = [];
+  contacts.filter(element => {
+    if (element.firstName === name) {
+      myArr.push(element);
     }
+  });
+  if (myArr.length < 1) {
+    console.log("No such contact");
   }
-  return "No such contact";
+
+  if (myArr[0][prop]) {
+    return myArr[0][prop];
+  } else {
+    return "No such property";
+  }
 }
 
 // Change these values to test your function
