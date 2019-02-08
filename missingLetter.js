@@ -10,12 +10,18 @@ function fearNotLetter(str) {
       }
       return 0;
     });
-  let flag = undefined;
-  for (let i = 1; i <= str.length - 1; i++) {
-    if (str[i].charCodeAt() - str[i - 1].charCodeAt() != 1) {
-      flag = String.fromCharCode(str[i].charCodeAt() - 1);
-    }
-  }
-  return flag;
+
+  return str.slice(1).reduce(
+    ([prevL, foundL], currL) => {
+      if (currL.charCodeAt() - prevL.charCodeAt() != 1) {
+        return [0, String.fromCharCode(currL.charCodeAt() - 1)];
+      } else if (foundL) {
+        return [0, foundL];
+      } else {
+        return [currL, null];
+      }
+    },
+    [str[0], null]
+  )[1];
 }
 console.log(fearNotLetter("abce"));
