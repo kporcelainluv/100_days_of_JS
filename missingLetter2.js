@@ -23,8 +23,6 @@ function fearNotLetter(str) {
       }
     });
 
-  console.log({ res });
-
   return typeof res === "String" ? res : undefined;
 }
 console.log(fearNotLetter("abcde"));
