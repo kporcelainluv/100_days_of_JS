@@ -11,7 +11,7 @@ let money = {
 };
 
 function checkCashRegister(price, cash, cid) {
-  const change = cash - price;
+  let change = cash - price;
   cid.sort((a, b) => {
     if (a[1] > b[1]) {
       return -1;
@@ -20,15 +20,10 @@ function checkCashRegister(price, cash, cid) {
     }
     return 0;
   });
-  console.log(cid);
-  let res = [];
-  cid.reduce(
-    [change, res],
-    elm => {
-      console.log(elm);
-    },
-    [change, res]
-  );
+  const myMap = new Map();
+  cid.forEach(element => {
+    myMap.set(money[element[0]], element[1]);
+  });
 }
 
 checkCashRegister(19.5, 20, [
