@@ -18,8 +18,14 @@ const checkFirstAndLastLetter = (s1, s2) => {
 };
 
 const checkSameNumOfLetters = (s1, s2) => {
-  s1 = s1.replace(/[0-9]/gi, "");
-  s2 = s2.replace(/[0-9]/gi, "");
+  s1 = s1
+    .replace(/\s/gi, "")
+    .replace(/\d/gi, "")
+    .split("");
+  s2 = s2
+    .replace(/\s/gi, "")
+    .replace(/\d/gi, "")
+    .split("");
   if (s1.length === s2.length) {
     return 5;
   }
@@ -28,15 +34,17 @@ const checkSameNumOfLetters = (s1, s2) => {
 const checkSameNumOfNums = (s1, s2) => {
   s1 = s1.replace(/\D/gi, "");
   s2 = s2.replace(/\D/gi, "");
+  if (s1.length === 0 || s2.length === 0) {
+    return 0;
+  }
   if (s1.length === s2.length) {
     return 5;
   }
   return 0;
 };
 const checkNumOfWords = (s1, s2) => {
-  s1 = s1.split(" ");
-  s2 = s2.split(" ");
-
+  s1 = s1.split(" ").filter(elm => /\S/.test(elm));
+  s2 = s2.split(" ").filter(elm => /\S/.test(elm));
   if (s1.length <= 1 && s2.length <= 1) {
     return 0;
   }
@@ -132,11 +140,13 @@ const checkDifferenceOfCHars = (s1, s2) => {
   let res = [];
   s1 = s1.split("");
   s2 = s2.split("");
+  console.log(s1, s2);
   s1.forEach(elm => {
     if (s2.indexOf(elm) === -1) {
       res.push(elm);
     }
   });
+  console.log("res", res);
   if (res.length === 1) {
     return 30;
   }
